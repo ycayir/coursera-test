@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+browser-sync start --server --directory --files "*"
+	Starts browser-sync 
+	--server: in server mode. It means that it becomes an http server.
+	--directory: gives you directory listing
+	--files: which files should browser-synch watch for. * means reload everything.
+
+Ctrl+R 
+	to search terminal history
+
+git remote show origin 
+	Lists all remote branches
+
+** Common Git commands **
+git status
+git add <file>...
+	to update what will be committed
+git checkout -- <file>...
+	discards changes
+git commit -m "<comment>"
+git push
+
+** Resources for Web Development **
+stackoverflow.com
+jsfiddle.net
+CodePen.io
+css-tricks.com
+www.w3.org/TR/html5/
+caniuse.com
+validator.w3.org/
+www.w3schools.com/browsers/browsers_stats.asp
+
+Hypertext means "text which contains links to other texts".
+HTML surrounds your content with tags.
+HTML provides the structure. Only tells you about the components.
+CSS provides the style.
+Javascript provides behavior.
+
+Two organisations: 
+	- W3C
+	- WHATWG
+
+
+Double and single quotes used interchangeably in HTML.
+Meta tags communicate information to the BROWSER.
+
+
+Content Types before HTML5:
+	- Block-level elements; Render to begin on a new line. May contain inline or other block-level elements. Roughly Flow Content.
+	- Inline elements. Render on the same line. May contain other inline elements. Roughly Phrasing Content.
+	Note: HTML5 replaces these categories with more complex set of content categories.
+
+** Resources on content types **
+www.w3.org/TR/html5/dom.html#kinds-of-content
+
+SEMANTIC: Relating to meaning in language or logic
+SEMANTIC HTML ELEMENT: Element that implies some meaning to the content. In other words, element that tells you about the content.
+
+Semantic elements:
+	- May help the SEO (search engine optimization) ranking of the page
+	- Help computers better understand the structure of the page
+	- Help humans better understand the structure of the page
+
+
+** Important HTML entity references **
+Use HTML entities to avoid rendering issues.
+&lt;
+	"less than" sign
+&gt;
+	"greater than" sign
+&amp;
+	"ampersand" sign
+&nbsp;
+	for sticking words together. Use <span/> with some padding instead of many &nbsp; entity.
+&copy;
+	"copyright" sign
+&quot;
+	"quot" sign
+
+
+** Images **
+When using image tag always use width, height, and alt attributes so that the image will hold a space for the image. 
+    <img src="image.jpg" width="640" heigth="480" alt="Picture with quote">
+
+** CSS **
+CSS is a powerful technology. User experience matters.
+Check out a very nice web page
+www.csszengarden.com
+
+CSS Rule
+Comprises of selector, property and value.
+p {
+    color: blue;
+}
+
+Types of selectors:
+	- Element
+	- class
+	- id
+
+Class selector
+.myblue {
+	color: blue;
+}
+In this case, myblue is class name.
+
+id selector
+#myname {
+	color: blue;
+}
+In this case myname is the id of the tag. It affects the tags whose id is equal to myname
+
+Element with class selector (selector.class)
+p.big {
+	font-size: 20px;
+}
+Every paragraph that has class="big".
+
+Child (direct) selector (selector > selector)
+article > p {
+	color: blue;
+}
+Every p that is a direct child of article.
+
+Descendent selector (selector selector)
+article p {
+	color: blue;
+}
+Every p element that is inside (at any level) of article.
+
+.colored p {
+	color: blue;
+}
+Every p element that is inside (at any level) of an element with class="colored".
+
+article > .colored {
+	color: blue;
+}
+Every element with class="colored" that is a direct child of article element
+
+Other combining selectors
+	- Adjacent sibling selector (selector + selector)
+	- General sibling selector (selector ~ selector)
+
+Pseudo-class selector
+selector:pseudo-class {
+	...
+}
+
+examples
+	:link
+	:visited
+	:hover
+	:active
+	:nth-child(...)
+
+** Style Placement **
+- In line styling. In the style attribute of an element. Least prefered way. Useful for inline testing.
+<p style="text-align: center;">I am centered</p>
+
+- Define style rules in the <style/> element inside the <head/> tag. This is also limited usage, if we want to use the same set of CSS rules across all the pages. You can use this to override external stylesheets.
+
+- External stylesheets. Use <link/> tag inside <head/> tag to refer to the external stylesheets. You can use multiple stylesheets. Last one overrides the previous if there is common style is defined in both files.
+<link rel="stylesheet" href="style.css"/>
+
+
+Origin Precedence (when in conflict). Same element with same declarations.
+	Last Declaration wins
+
+Origin Precedence (when no conflict). Same element with different declarations.
+	Declarations merge
+
+Inheritance: If we specify an attribute in an element in the DOM tree, every child and grandchild element of that element will inherit the same attribute.
+For example, following style will be used for all element under <body/> element in the HTML.
+<style>
+	body {
+		color: red;
+		text-align: center;
+		font-family: Helvetica;
+	}
+</style>
+
+Specificity: Most specific selector combination wins. You can think of it as; specificity of the selectors is keeping a score. Selectors with a highest score wins.
+
+Specificity (scoring) from the highest to lowest.
+1- Using style attribute in the tag.
+2- Targeting with ID attribute
+3- Targeting with Class, Pseudo-class attribute
+4- Number of elements
+
+Number of elements used in the following example is 2.
+div p { color: blue; }
+	Scoring: 0 0 0 2
+
+For example;
+div #myParag {
+	color: blue;
+}
+	Scoring: 0 1 0 1
+
+div.big p {
+	color: green;
+}
+	Scoring: 0 0 1 2
+
+So, the paragrapth will be blue because the first declaration wins the scoring.
+
+For example;
+header.navigation p {
+	color: blue;
+}
+	Scoring: 0 0 1 2
+
+p {
+	color: green;
+}
+	Scoring: 0 0 1 1
+
+So, the paragraph will be blue.
+
+If you define a declaration with !Important, that declaration takes precedence. Avoid using !Important. It makes a mess.
+For instance,
+p {
+	color: green !Important;
+}
+It doesn't matter if we specified other declarations for color. This one overrides everything.
+
+** TEXT Styling **
+font-family: Arial, Helvetica, sans-serif;
+color: 0000ff;	// blue
+font-style: italic;
+font-weight: bold;
+font-size: 24px;	// Most browsers default font-size is 16px.
+text-transform: capitalize;
+text-align: right;	// Right justified with its block
+
+Relative Size
+	- Percent
+	- em
+
+Percent
+body {
+	font-size: 120%;
+}
+		Increases the size by 120%
+
+em
+This is a unit of measurement that is equivalent to the width of the letter m in this font. Relative size to the current value. Cumulative effect.
+body {
+	font-size: 2em
+}
+		Doubles the size
+
+body {
+	font-size: .5em
+}
+		Halves the size
+
+
+** THE BOX MODEL **
+HTML elements have a box layout. (From outside to inside) they have margin, border, and padding.
+Padding + border + width of the content = Width of the box.
+Margin defines how much other elements should pushed away from it.
+
+#box {
+	background-color: blue;
+	padding: 10px 10px 10px 10px;
+	border: 5px solid black;
+	margin: 40px 40px 40px 40px;
+	width: 300px;
+	box-sizing: border-box;
+}
+
+box-sizing is a CSS 3 property. Default value for box-sizing is content-box. This means that whenever you change the size of margin, border, and padding, the overall width of the box changes as well. This is annoying. Setting box-sizing to border-box changes this behavior so that the whole box value stays as you specified.
+Also, box-sizing is not an inherited CSS property, i.e. it doesn't work if you put it in a parent element like "body" and expect it to work with all elements. To get around that use * (universal) selector.
+* {
+	box-sizing: border-box;
+}
+
+
+** Margin **
+Margin is the most outside part of the box element.
+If two box elements are side by side, their margins are added. For example, right margin of the left element is 20px and left margin of the right element is 30px, then total margin between the elements is 50px. However, if these elements are one top of each other then margins collapse with the larger margin takes over. So, if top box has bottom margin as 20px and bottom box has top margin as 30px then the margin between them is 30px.
+
+
+** Floating Elements **
+The float property specifies whether or not a box (an element) should float.
+
+Example: Let a paragraph float to the right of its container.
+p {
+	float: right;
+}
+When the elements are floated, they are being taken out of their regular document flow. Elements after a floating element will float around it. To avoid this, use 'clear' property.
+
+To tell the browser to resume the flow for a particular element we use clear property.
+section {
+	clear: left;
+}
+		Nothing should be allowed to be floating to the left of it.
+
+** Static Positioning **
+Normal document flow. Default for all, except html tag. 'html' tags positioning is set to relative.
+Positioning offsets are ignored.
+
+** Relative Positioning **
+Element is positioned relative to its position in normal document flow.
+Positioning CSS offset properties are: top, bottom, left, right. Offsetting the relative container element offsets its contents as well which allows you to move whole set of elements with the container element.
+Element is not taken out of normal document flow. Even it is moved, its original spot is preserved.
+p {
+	position: relative;
+	top: 50px;
+	left: 50px;
+}
+
+All offsets (top, bottom, left, right) are relative to the non-static positioning set on it (relative).
+
+** Absolute Positioning **
+Absolute positioning is relative to closest ancestor which has positioning set to non-static (i.e. absolute or relative) value. By default, 'html' element's positioning is set to relative. Others set to static positioning.
+Element is taken out of normal document flow, if its positioning set to absolute. Other elements take over it's position as if it doesn't exist.
+
+
+** Media Queries **
+Allows to group styles together and target them to devices based on some criteria.
+Media query defined by @media keyword and after that media feature section in paranthesis. Media feature resolves a boolean (true or false). Multiple media features can be conbined with logical operators. Styles go in the curly paranthesis. If media feature resolves to true then syles within the curly braces apply.
+
+Example: Create a media query targetted for a screen width size is equal to 767 pixels.
+@media (max-width: 767px) {
+	p {
+		color: blue;
+	}
+}
+
+Examples:
+@media (max-width: 800px) {...}
+@media (min-width: 800px) {...}
+@media (orientation: portrait) {...}
+@media screen {...}
+@media print {...}
+
+Example: AND operation
+@media (min-width: 768px) and (max-width: 991px) {...}
+
+Example: OR operation (, is used)
+@media (min-width: 767px) , (max-width: 992px) {...}
+
+When using the media queries start with a base style and then change that style whithin the media queries for specific devices.
+
+
+** Responsive Web Site **
+Site designed to adapt its layout to the viewing environment by using fluid, proportion-based grids, flexible images, and CSS3 media queries.
+
+For responsive design, instead of server detecting the user agent, we can use 12-Column Grid Responsive layout.
+This layout is dividing the page into sections that are evenly split. Page is divided by factors of 12 (1,2,3,4,6,12).
+
+Mobile devices actually zoom out to display all content. Zooming is default behavior on mobile. If you make the web page responsive then the device does not need to use zooming. To turn off default mobile zooming, you can use <meta/> tag to tell the device's browser not to zoom out.
+Example:
+<meta name="viewport" content="width=device-width, initialscale=1"/>
+
+
+LECTURE 25
+==========
+
+** Twitter Bootstrap **
+CSS framework from Twitter.
+Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
+2 approaches for web development:
+	- Mobile first
+	- Desktop first
+
+Bootstrap is 
+	Mobile first == PLAN mobile from the start
+	CSS framework is mobile ready
+
+LECTURE 26
+==========
+
+Bootstrap Grid System
+	- We need to have an element whose class is 'container'.
+	- Then inside the container we need to have an element whose class is 'row'. This class defines the rows.
+	- Then we can define the columns. Class structure for column is like col-SIZE-SPAN where SIZE is the screen width range identifier and can be lg, md, or sm. Columns will collapse below that width. SPAN means how many columns element should span (1 through 12).
+
+Example:
+	<header class="container">
+		<nav class="row">
+			<div class="col-md-4">Col 1</div>
+			...
+		</nav>
+	</header>
+
+For more information:
+http://getbootstrap.com/docs/4.0/layout/grid/
+
+
+
+
+
+
+
+
+
+
+
